@@ -17,16 +17,13 @@ struct Max<List<First, Second, Rest...>>
     static constexpr int value = Max<List<First >= Second ? First : Second, Rest...>>::value;
 };
 
-
 template<typename List, int Add> struct Append;
-
 
 template<template<int...> class List, int Add, int... Rest>
 struct Append<List<Rest...>, Add>
 {    
     using type = List<Rest..., Add>;
 };
-
 
 template<typename List, int Idx> struct FindIndexElement;
 
@@ -108,7 +105,6 @@ struct If_Then<true, TrueResult, FalseResult>
 template<template<int...> class List, int Value, int First, int... Rest>  
 struct RemoveValue<List<First, Rest...>, Value>
 {
-    
     template<typename _List1, typename _List2, int _Value> struct remove_helper;  
     
     template<typename _List1, template<int...> class _List2, int _Value, int _First, int... _Rest>
@@ -151,7 +147,7 @@ int main()
     //根据下标删除元素
     using Remove_Index_4_List = Remove<List<1, 2, 3, 4, 5, 6>, 4>::type;  //删除了数字5.
     std::cout << "type_list remove index[4] is same: " << std::is_same_v<Remove_Index_4_List, List<1, 2, 3, 4, 6>> << std::endl; 
-    //根据值删除列表下搜索符合的值
+    //删除列表中所有符合给定值的元素
     using Remove_Value_3_List= RemoveValue<List<1, 2, 3, 4, 3, 3>, 3>::type;
     std::cout << "type_list remove value 3 is same: " << std::is_same_v<Remove_Value_3_List, List<1, 2, 4>> << std::endl; 
     return 0;
